@@ -13,8 +13,8 @@ steps:
 
   - task: CmdLine@2
     inputs:
-      script: 'brew install create-dmg'
-    displayName: 'Installing Create DMG'
+      script: 'pip install dmgbuild'
+    displayName: 'Installing dmgbuild'
 
   - task: CmdLine@2
     inputs:
@@ -81,19 +81,12 @@ steps:
   - task: CmdLine@2
     inputs:
       script: |
-        create-dmg \
-          --volname "Synergy" \
-          --volicon "$(Build.Repository.LocalPath)/build/bundle/Synergy.app/Contents/Resources/Synergy.icns" \
-          --background "$(Build.Repository.LocalPath)/build/bundle/Synergy.app/Contents/Resources/installer_background.png" \
-          --window-pos 200 120 \
-          --window-size 600 400 \
-          --icon-size 110 \
-          --icon "Synergy" 150 190 \
-          --hide-extension "Synergy.app" \
-          --app-drop-link 455 190 \
-          --hdiutil-quiet \
-          $(SYNERGY_DMG_FILENAME) \
-          "$(Build.Repository.LocalPath)/build/bundle/"
+        CI/MacOS/dmgbuild \
+          -s installator_settings.py \
+          -D app=$(Build.Repository.LocalPath)/build/bundle/Synergy.app \
+          -D background=$(Build.Repository.LocalPath)/build/bundle/Synergy.app/Contents/Resources/installer_background.png \
+          "Synergy" \
+          $(SYNERGY_DMG_FILENAME)
         mkdir pkg
         mv $(SYNERGY_DMG_FILENAME) pkg/
         cd pkg
