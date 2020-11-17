@@ -81,8 +81,8 @@ steps:
   - task: CmdLine@2
     inputs:
       script: |
-        CI/MacOS/dmgbuild \
-          -s installator_settings.py \
+        dmgbuild \
+          -s CI/MacOS/installator_settings.py \
           -D app=$(Build.Repository.LocalPath)/build/bundle/Synergy.app \
           -D background=$(Build.Repository.LocalPath)/build/bundle/Synergy.app/Contents/Resources/installer_background.png \
           "Synergy" \
