@@ -12,6 +12,24 @@ jobs:
           version: 10.12
           buildType: "standard"
           prefix: "synergy"
+        mojave-ent:
+          image: macOS-10.14
+          name: mojave
+          version: 10.12
+          buildType: "enterprise"
+          prefix: "synergy-enterprise"
+        catalina-std:
+          image: macOS-10.15
+          name: catalina
+          version: 10.14
+          buildType: "standard"
+          prefix: "synergy"
+        catalina-ent:
+          image: macOS-10.15
+          name: catalina
+          version: 10.14
+          buildType: "enterprise"
+          prefix: "synergy-enterprise"
     pool:
       vmImage: $[ variables['image'] ]
 
